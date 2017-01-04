@@ -8,22 +8,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TerraGame extends Game {
 	
-	//Sergey is vstupid.
-	
 	@Override
 	public void create () {
-		
+		setScreen(new MainMenuScreen());
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
-		
+		super.dispose();
 	}
 	
 	@Override
