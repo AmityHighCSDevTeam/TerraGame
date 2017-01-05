@@ -6,36 +6,46 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 
-public class MainMenuScreen implements Screen{
-	
+public class InGameScreen implements Screen{
+
 	private OrthographicCamera cam;
-	private Texture img;
-	private SpriteBatch batch;
+	private Texture[] blocks = new Texture[128];
+	private int blockSize = 16;
+	private Texture player;
+	private SpriteBatch batch = new SpriteBatch();
+	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
-		img = new Texture(Gdx.files.internal("badlAogic.jpg"));
-		batch = new SpriteBatch();
+		//bringing in textures for blocks
+		for (int i = 0; i < 128; i++) {
+			try {
+				blocks[i] = new Texture(Gdx.files.internal("blocks/" + i + ".png"));
+			} catch (Exception GdxRuntimeException) {
+				blocks[i] = new Texture(Gdx.files.internal("missing.png"));
+			}
+		}
 		
 	}
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(cam.combined);
 		batch.begin(); {
-			batch.draw(img, 0, 0, 100, 100);
+			int w = Gdx.graphics.getWidth() / blockSize;
+			for (int i = 0; i < 128; i++) {
+				batch.draw(blocks[i], (i % w) * blockSize, (i / w) * blockSize, blockSize, blockSize);
+			}
 		} batch.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		cam.setToOrtho(false, width, height);
+		
 	}
 
 	@Override
@@ -59,11 +69,7 @@ public class MainMenuScreen implements Screen{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		img.dispose();
-		batch.dispose();
 		
 	}
-
-	
 
 }
