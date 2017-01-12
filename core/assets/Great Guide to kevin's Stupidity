@@ -1,0 +1,20 @@
+GUIDE TO THE ATLAS:
+  Top row: block textures. they are 32x32 each.
+  left, under the top row: The player's sprite
+
+BLOCK FILE FORMAT:
+  //todo
+
+LOCATION FORMAT:
+  ChunkX, ChunkY, x in chunk, y in chunk
+  ChunkX is which chunk from the left the entity is in
+  ChunkY is chunks from the bottom
+
+WORLD FILE FORMAT:
+  Line1: worldWidth worldHeight //both of these in chunk count
+  Line2: Location of player (using location format)
+
+CHUNK FILE FORMAT:
+  name: xInWorld_yInWorld.cnk
+  Lines: block id's, seperated by spaces. ex:
+  00 01 00 01 00 01 // alternating block0 and block1
