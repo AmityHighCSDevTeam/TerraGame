@@ -13,13 +13,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class InGameScreen implements Screen{
 
 	private OrthographicCamera cam;
-	private Texture worldAtlas;
-	private TextureRegion[] blocks;
 	private TextureRegion player;
 	private SpriteBatch batch = new SpriteBatch();
-	private final int BLOCK_SIZE = 32;
-	private final int PLAYER_WIDTH = 2;
-	private final int PLAYER_HEIGHT = 3;
+	public World world;
 	
 	public InGameScreen() {
 		Thread gameLoopThread = new Thread(new GameLoop(), "Game Loop Thread"); 
@@ -29,16 +25,15 @@ public class InGameScreen implements Screen{
 	
 	@Override
 	public void show() {
-		Block b = new Block(0);
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getWidth());
-		//bringing in textures for blocks
-		worldAtlas = new Texture("world_atlas.png");
-		blocks = new TextureRegion[128];
-		for (int i = 0; i < blocks.length; i++) 
-			blocks[i] = new TextureRegion(worldAtlas, BLOCK_SIZE * i, 0, BLOCK_SIZE, BLOCK_SIZE);
-											// X-coord in atlas, Y in atlas, width in blocks, height in blocks
-		player = new TextureRegion(worldAtlas, BLOCK_SIZE * 0, BLOCK_SIZE * 1, BLOCK_SIZE * PLAYER_WIDTH, BLOCK_SIZE * PLAYER_HEIGHT);
 		
+		
+			
+								// X-coord in atlas, Y in atlas, width in blocks, height in blocks
+		player = new TextureRegion(Constants.WORLD_ATLAS, Constants.BLOCK_SIZE * 0, Constants.BLOCK_SIZE * 1, Constants.BLOCK_SIZE * Constants.PLAYER_WIDTH, Constants.BLOCK_SIZE * Constants.PLAYER_HEIGHT);
+		world = new World("test");
+		world.moveLoaded(-10, 5);
+		System.out.print(world.loaded[8][8].toString());
 	}
 
 	@Override

@@ -3,14 +3,18 @@ GUIDE TO THE ATLAS:
   left, under the top row: The player's sprite
 
 BLOCK FILE FORMAT:
-  //todo
+  name: blockid.bok //ex: block0.bok
+  Line1: name of block
+  Line2: (passable) //boolean 0 or 1, 1 = passable, any other number is not
+  Line3:
 
 LOCATION FORMAT:
-  ChunkX, ChunkY, x in chunk, y in chunk
+  ChunkX ChunkY xInChunk yInChunk
   ChunkX is which chunk from the left the entity is in
   ChunkY is chunks from the bottom
 
 WORLD FILE FORMAT:
+  name: worldName.wrd
   Line1: worldWidth worldHeight //both of these in chunk count
   Line2: Location of player (using location format)
 
